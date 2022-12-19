@@ -2,12 +2,20 @@ package com.cheezycode.daggerexample
 
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 @Module
 class NotificationServiceModule {
 
+    @MessageQualifier
     @Provides
-    fun getNotificationService(): NotificationService{
+    fun getMessageService(): NotificationService{
         return MessageService()
+    }
+
+    @Named("email")
+    @Provides
+    fun getEmailService(emailService: EmailService):NotificationService{
+        return emailService
     }
 }
